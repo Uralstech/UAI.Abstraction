@@ -66,6 +66,8 @@ They can then be passed into a [variant of the `Chat` function](~/api/Uralstech.
 to be called by the model.
 
 ```csharp
+using Newtonsoft.Json.Linq;
+using Uralstech.UAI.Abstraction.Chat;
 using Uralstech.UAI.Abstraction.Tools;
 
 ChatInferenceResult result = await client.Chat(new Message[]
@@ -97,7 +99,7 @@ async Awaitable<JObject> PrintToConsole(JToken input)
 {
     await Awaitable.MainThreadAsync(); // Just to make this a valid Awaitable.
 
-    Debug.Log(input["query"].ToObject<string>());
+    Debug.Log(input["text"].ToObject<string>());
     return new JObject()
     {
         ["status"] = "Printed text to console."

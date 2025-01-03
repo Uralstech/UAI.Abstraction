@@ -3,7 +3,7 @@
   "displayName": "UAI.Abstraction",
   "description": "Contains abstraction for common AI APIs so that different LLM providers like Gemini and OpenAI can be used through a unified interface. Currently supports the Google Gemini and OpenAI GPT APIs.",
   "keywords": [],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "hideInEditor": false,
   "documentationUrl": "https://uralstech.github.io/UAI.Abstraction/",
   "changelogUrl": "https://github.com/Uralstech/UAI.Abstraction/releases",
