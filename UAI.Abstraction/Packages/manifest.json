@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "com.openai.unity": "8.4.4",
+    "com.unity.ide.visualstudio": "2.0.22",
+    "com.uralstech.ugemini": "2.2.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.uralstech",
+        "com.openai",
+        "com.utilities"
+      ],
+      "overrideBuiltIns": false
+    }
+  ]
+}
