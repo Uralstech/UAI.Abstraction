@@ -1,0 +1,30 @@
+{
+    "name": "UAI.Abstraction",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2281fe9ed9abb88469162fc481fcc7a1",
+        "GUID:cff68a29e5fb7304f870d05a11483ba1",
+        "GUID:3248779d86bd31747b5d2214f30b01ac",
+        "GUID:7958db66189566541a6363568aee1575"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.uralstech.ugemini",
+            "expression": "2.2.0",
+            "define": "COM_URALSTECH_UGEMINI"
+        },
+        {
+            "name": "com.openai.unity",
+            "expression": "8.4.0",
+            "define": "COM_OPENAI_UNITY"
+        }
+    ],
+    "noEngineReferences": false
+}
