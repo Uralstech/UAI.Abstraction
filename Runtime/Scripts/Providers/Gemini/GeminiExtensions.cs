@@ -137,7 +137,7 @@ namespace Uralstech.UAI.Abstraction.Providers.Gemini
         }
 
         /// <summary>
-        /// Converts a collection of generic functions to an array of <see cref="UGemini.Models.Generation.Tools.Declaration.GeminiTool"/>s.
+        /// Converts a collection of generic functions to a <see cref="UGemini.Models.Generation.Tools.Declaration.GeminiTool"/>s.
         /// </summary>
         public static UGemini.Models.Generation.Tools.Declaration.GeminiTool ToGemini(this IReadOnlyList<Function> functions)
         {
@@ -150,6 +150,63 @@ namespace Uralstech.UAI.Abstraction.Providers.Gemini
             {
                 FunctionDeclarations = geminiFunctions
             };
+        }
+
+        /// <summary>
+        /// Converts a collection of generic tools to an array of <see cref="UGemini.Models.Generation.Tools.Declaration.GeminiTool"/>s.
+        /// </summary>
+        /// <remarks>
+        /// Native <see cref="WebSearch"/> requires UGemini 2.3.0 or greater.
+        /// </remarks>
+        /// <exception cref="System.NotImplementedException">Thrown if a generic tool has no known Gemini equivalent.</exception>
+        public static UGemini.Models.Generation.Tools.Declaration.GeminiTool[] ToGemini(this IReadOnlyList<ITool> tools)
+        {
+            List<UGemini.Models.Generation.Tools.Declaration.GeminiTool> geminiTools = new();
+            System.Lazy<List<Function>> functions = new();
+
+            foreach (ITool tool in tools)
+            {
+                switch (tool)
+                {
+                    case Function function:
+                        functions.Value.Add(function);
+                        break;
+
+#if COM_URALSTECH_UGEMINI_2_3_0_OR_GREATER
+                    case WebSearch:
+                        geminiTools.Add(new UGemini.Models.Generation.Tools.Declaration.GeminiTool()
+                        {
+                            GoogleSearchRetrieval = new()
+                            {
+                                DynamicRetrievalConfig = new()
+                                {
+                                    Mode = UGemini.Models.Generation.Tools.Declaration.GoogleSearch.GeminiDynamicRetrievalMode.Dynamic
+                                }
+                            }
+                        });
+                        break;
+#endif
+
+                    case CodeInterpreter:
+                        geminiTools.Add(new UGemini.Models.Generation.Tools.Declaration.GeminiTool()
+                        {
+                            CodeExecution = new()
+                        });
+                        break;
+
+                    case INativeTool nativeTool when nativeTool.Fallback is not null:
+                        functions.Value.Add(nativeTool.Fallback);
+                        break;
+
+                    default:
+                        throw new System.NotImplementedException($"Cannot convert generic tool to gemini: {tool.GetType().Name}");
+                }
+            }
+
+            if (functions.IsValueCreated)
+                geminiTools.Add(functions.Value.ToGemini());
+
+            return geminiTools.ToArray();
         }
 
         /// <summary>
