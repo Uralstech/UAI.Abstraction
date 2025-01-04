@@ -62,7 +62,7 @@ For clients that support the feature, you can also turn of the safety filters of
 ## Function Calling
 
 You can define functions using the [`Function`](~/api/Uralstech.UAI.Abstraction.Tools.Function.yml) class.
-They can then be passed into a [variant of the `Chat` function](~/api/Uralstech.UAI.Abstraction.IModelClient.yml#Uralstech_UAI_Abstraction_IModelClient_Chat_System_Collections_Generic_IReadOnlyList_Uralstech_UAI_Abstraction_Message__System_Collections_Generic_IReadOnlyList_Uralstech_UAI_Abstraction_Tools_Function__System_String_System_Int32_System_Boolean_System_Threading_CancellationToken_)
+They can then be passed into a [variant of the `Chat` function](~/api/Uralstech.UAI.Abstraction.IModelClient.yml#Uralstech_UAI_Abstraction_IModelClient_Chat_System_Collections_Generic_IReadOnlyList_Uralstech_UAI_Abstraction_Message__System_Collections_Generic_IReadOnlyList_Uralstech_UAI_Abstraction_Tools_ITool__System_String_System_Int32_System_Boolean_System_Threading_CancellationToken_)
 to be called by the model.
 
 ```csharp
