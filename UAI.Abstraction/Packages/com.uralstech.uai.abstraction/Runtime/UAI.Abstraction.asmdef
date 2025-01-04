@@ -21,6 +21,11 @@
             "define": "COM_URALSTECH_UGEMINI"
         },
         {
+            "name": "com.uralstech.ugemini",
+            "expression": "2.3.0-preview.7",
+            "define": "COM_URALSTECH_UGEMINI_2_3_0_OR_GREATER"
+        },
+        {
             "name": "com.openai.unity",
             "expression": "8.4.0",
             "define": "COM_OPENAI_UNITY"

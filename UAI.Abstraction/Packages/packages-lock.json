@@ -77,28 +77,31 @@
       }
     },
     "com.uralstech.ucloud.operations": {
-      "version": "1.1.4",
+      "version": "1.1.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.uralstech.utils.singleton": "1.0.1",
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
+        "com.uralstech.utils.singleton": "1.2.1",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.unitywebrequest": "1.0.0"
       },
       "url": "https://package.openupm.com"
     },
     "com.uralstech.ugemini": {
-      "version": "2.2.0",
+      "version": "2.3.0-preview.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.uralstech.utils.singleton": "1.0.1",
-        "com.uralstech.ucloud.operations": "1.1.4",
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
+        "com.uralstech.utils.singleton": "1.2.1",
+        "com.uralstech.ucloud.operations": "1.1.6",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
       },
       "url": "https://package.openupm.com"
     },
     "com.uralstech.utils.singleton": {
-      "version": "1.0.1",
+      "version": "1.2.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -185,7 +188,7 @@
     },
     "com.unity.modules.imageconversion": {
       "version": "1.0.0",
-      "depth": 3,
+      "depth": 1,
       "source": "builtin",
       "dependencies": {}
     },
@@ -215,7 +218,7 @@
     },
     "com.unity.modules.unitywebrequest": {
       "version": "1.0.0",
-      "depth": 2,
+      "depth": 1,
       "source": "builtin",
       "dependencies": {}
     },

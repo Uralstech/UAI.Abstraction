@@ -14,7 +14,6 @@
 
 #if COM_URALSTECH_UGEMINI
 
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -102,17 +101,22 @@ namespace Uralstech.UAI.Abstraction.Providers.Gemini
         }
 
         /// <inheritdoc/>
-        public async Awaitable<ChatInferenceResult> Chat(IReadOnlyList<Message> messages, IReadOnlyList<Function> tools, string model = null, int maxToolCalls = 10, bool tryRemoveFilters = false, CancellationToken token = default)
+        public async Awaitable<ChatInferenceResult> Chat(IReadOnlyList<Message> messages, IReadOnlyList<ITool> tools, string model = null, int maxToolCalls = 10, bool tryRemoveFilters = false, CancellationToken token = default)
         {
             Debug.Log("Running chat request through Gemini client.");
             if (string.IsNullOrEmpty(model))
                 model = DefaultModelId;
 
-            GeminiTool[] geminiTools = new GeminiTool[] { tools.ToGemini() };
+            GeminiTool[] geminiTools = tools.ToGemini();
             Dictionary<string, Function> functionMap = new();
 
-            foreach (Function function in tools)
+            foreach (ITool tool in tools)
+            {
+                if (tool is not Function function)
+                    continue;
+
                 functionMap[function.Name] = function;
+            }
 
             List<GeminiContent> history = new(messages.ToGemini(out GeminiContent systemMessage));
             GeminiSafetySettings[] safetySettings = tryRemoveFilters ? s_disabledSafetySettings : null;

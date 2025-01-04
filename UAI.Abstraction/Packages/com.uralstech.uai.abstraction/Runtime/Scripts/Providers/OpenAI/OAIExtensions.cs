@@ -112,11 +112,20 @@ namespace Uralstech.UAI.Abstraction.Providers.OAI
         /// <summary>
         /// Converts a collection of generic functions to an array of <see cref="OpenAI.Tool"/>s.
         /// </summary>
-        public static OpenAI.Tool[] ToOAI(this IReadOnlyList<Function> functions)
+        /// <exception cref="System.NotImplementedException">Thrown if a generic tool has no known OAI equivalent.</exception>
+        public static OpenAI.Tool[] ToOAI(this IReadOnlyList<ITool> functions)
         {
             OpenAI.Tool[] tools = new OpenAI.Tool[functions.Count];
             for (int i = 0; i < tools.Length; i++)
-                tools[i] = functions[i].ToOAI();
+            {
+                tools[i] = functions[i] switch
+                {
+                    Function function => function.ToOAI(),
+                    CodeInterpreter => OpenAI.Tool.CodeInterpreter,
+                    INativeTool nativeTool when nativeTool.Fallback is not null => nativeTool.Fallback.ToOAI(),
+                    _ => throw new System.NotImplementedException($"Cannot convert generic tool to OAI: {functions[i].GetType().Name}")
+                };
+            }
 
             return tools;
         }

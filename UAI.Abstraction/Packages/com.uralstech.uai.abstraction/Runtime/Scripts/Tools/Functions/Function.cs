@@ -24,8 +24,11 @@ namespace Uralstech.UAI.Abstraction.Tools
     /// A function that can be invoked by a model.
     /// </summary>
     [JsonObject]
-    public class Function
+    public class Function : ITool
     {
+        /// <inheritdoc/>
+        public ToolType Type => ToolType.CustomFunction;
+
         /// <summary>
         /// The name/ID of the function.
         /// </summary>
