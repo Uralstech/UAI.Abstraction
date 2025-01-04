@@ -72,7 +72,14 @@ namespace Uralstech.UAI.Abstraction.Providers.OAI
 
             foreach (ITool tool in tools)
             {
-                if (tool is not Function function)
+                Function function = tool switch
+                {
+                    Function f => f,
+                    INativeTool nativeTool when nativeTool.Fallback is not null => nativeTool.Fallback,
+                    _ => null
+                };
+
+                if (function is null)
                     continue;
 
                 functionMap[function.Name] = function;
