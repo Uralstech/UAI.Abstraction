@@ -5,6 +5,11 @@ Contains abstraction for common AI APIs so that different LLM providers like Gem
 [![openupm](https://img.shields.io/npm/v/com.uralstech.uai.abstraction?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.uralstech.uai.abstraction/)
 [![openupm](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=downloads&query=%24.downloads&suffix=%2Fmonth&url=https%3A%2F%2Fpackage.openupm.com%2Fdownloads%2Fpoint%2Flast-month%2Fcom.uralstech.uai.abstraction)](https://openupm.com/packages/com.uralstech.uai.abstraction/)
 
+## Deprecation Notice
+
+[As UGemini has been officially deprecated](https://github.com/uralstech/UGemini?tab=readme-ov-file#deprecation-notice),
+I have decided to archive UAI.Abstraction. Thank you to those who have tried it. Feel free to fork this repo if needed.
+
 ## Installation
 
 Requires Unity 6.0 because of the plugin's usage of [*Awaitable*](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Awaitable.html). Built and tested in Unity 6.0.

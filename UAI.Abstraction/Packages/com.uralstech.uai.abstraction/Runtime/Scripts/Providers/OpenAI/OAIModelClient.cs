@@ -21,6 +21,7 @@ using OpenAI.Models;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Uralstech.UAI.Abstraction.Tools;
 using ChatInferenceResult = Uralstech.UAI.Abstraction.Chat.ChatInferenceResult;
 using Function = Uralstech.UAI.Abstraction.Tools.Function;
 
@@ -60,7 +61,7 @@ namespace Uralstech.UAI.Abstraction.Providers.OAI
         }
 
         /// <inheritdoc/>
-        public async Awaitable<ChatInferenceResult> Chat(IReadOnlyList<Message> messages, IReadOnlyList<Function> tools, string model = null, int maxToolCalls = 10, bool tryRemoveFilters = false, CancellationToken token = default)
+        public async Awaitable<ChatInferenceResult> Chat(IReadOnlyList<Message> messages, IReadOnlyList<ITool> tools, string model = null, int maxToolCalls = 10, bool tryRemoveFilters = false, CancellationToken token = default)
         {
             Debug.Log("Running chat request through OAI client.");
             if (string.IsNullOrEmpty(model))
@@ -68,8 +69,21 @@ namespace Uralstech.UAI.Abstraction.Providers.OAI
 
             Tool[] oaiTools = tools.ToOAI();
             Dictionary<string, Function> functionMap = new();
-            foreach (Function function in tools)
+
+            foreach (ITool tool in tools)
+            {
+                Function function = tool switch
+                {
+                    Function f => f,
+                    INativeTool nativeTool when nativeTool.Fallback is not null => nativeTool.Fallback,
+                    _ => null
+                };
+
+                if (function is null)
+                    continue;
+
                 functionMap[function.Name] = function;
+            }
 
             List<OpenAI.Chat.Message> history = new(messages.ToOAI());
             int initialHistoryLength = history.Count;

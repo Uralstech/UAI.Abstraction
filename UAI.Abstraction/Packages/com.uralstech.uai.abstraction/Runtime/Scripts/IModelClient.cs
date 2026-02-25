@@ -61,7 +61,7 @@ namespace Uralstech.UAI.Abstraction
         /// <returns>The model's response.</returns>
         public Awaitable<ChatInferenceResult> Chat(
             IReadOnlyList<Message> messages,
-            IReadOnlyList<Function> tools,
+            IReadOnlyList<ITool> tools,
             string model = default,
             int maxToolCalls = 10,
             bool tryRemoveFilters = false,
